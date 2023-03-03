@@ -144,6 +144,12 @@ export default function App() {
           WeatherAPI.com
         </a>
         </Typography>
+        <Typography
+        textAlign="center"
+        sx={{mt:2 , fontSize: "10px"}}
+      >
+          By Martin Tamola
+        </Typography>
     </Container>
   )
 }
