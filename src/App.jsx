@@ -3,7 +3,7 @@ import { Button, TextField, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { useState } from "react";
 
-const API_WEATHER = `https://api.openweathermap.org/data/2.5/weather?appid=${import.meta.env.VITE_APY_KEY}&lang=es`;
+const API_WEATHER = `https://api.openweathermap.org/data/2.5/weather?appid=57bf3b9c1321607efc63a452980cacb0&lang=es`;
 
 let cityUrl = "&q=";
 
