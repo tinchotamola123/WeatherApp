@@ -1,16 +1,12 @@
-//console.log(import.meta.env.VITE_APY_KEY);
-
-import { LoadingButton } from "@mui/lab";
-import { TextField, Typography } from "@mui/material";
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import { Button, TextField, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { useState } from "react";
 
-//const API_WEATHER = `http://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_APY_KEY}&q=`;
-
 const API_WEATHER = `https://api.openweathermap.org/data/2.5/weather?appid=${import.meta.env.VITE_APY_KEY}&lang=es`;
+
 let cityUrl = "&q=";
 
-//https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
 export default function App() {
   
@@ -86,7 +82,7 @@ export default function App() {
           id="city"
           label="Ciudad"
           variant="outlined"
-          size="samll"
+          size="large"
           required
           fullWidth
           value={city}
@@ -94,16 +90,17 @@ export default function App() {
           error={error.error}
           helperText={error.message}
         />
-        <LoadingButton
+        <Button
+          variant="contained"
           type="submit"
-          varint="text"
+          startIcon={<ManageSearchIcon />}
           loading={loading}
           loadingIndicator="Cargando..."
-          color="error"
-          size="large"
+          sx={{mt:1}}
+          size="medium"
         >
           Buscar
-        </LoadingButton>
+        </Button>
       </Box>
 
       {weather.city && (
