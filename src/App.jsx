@@ -20,7 +20,7 @@ export default function App() {
   const [weather, setWeather] = useState({
     city: "",
     country: "",
-    temp: "",
+    temp: parseInt(""),
     condition: "",
     conditionText: "",
   });
@@ -38,12 +38,12 @@ export default function App() {
       const response = await fetch(`${API_WEATHER}${cityUrl}${city}`);
       const data = await response.json();
       
-      if (data.error) throw { message: data.error.message}
+      if (data.error) throw { message: "Ciudad no encontrada"}
       console.log(data)
       setWeather({
         city: data.name,
         country: data.sys.country,
-        temp: data.main.temp,
+        temp: parseInt(data.main.temp)/10,
         condition: data.weather[0].main,
         conditionText: data.weather[0].description,
       })
@@ -52,7 +52,7 @@ export default function App() {
       console.log(error);
       setError({
         error: true,
-        message: error.message,
+        message: "Ciudad no encontrada",
       });
     }finally{
       setLoading(false);
@@ -119,7 +119,7 @@ export default function App() {
             {weather.condition.toUpperCase()},
           </Box>
           <Typography variant="h5" component="h3">
-            {weather.temp.toString()} °C
+            {weather.temp} °C
           </Typography>
           <Typography variant="h6" component="h4">
             {weather.conditionText.toUpperCase()}
