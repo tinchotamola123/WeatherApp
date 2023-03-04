@@ -1,10 +1,13 @@
-console.log(import.meta.env.VITE_APY_KEY)
+//console.log(import.meta.env.VITE_APY_KEY)
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
-import { Button, TextField, Typography } from "@mui/material";
+import { LoadingButton } from '@mui/lab';
+import { TextField, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { useState } from "react";
 
-const API_WEATHER = `https://api.openweathermap.org/data/2.5/weather?appid=${import.meta.env.VITE_APY_KEY}&lang=es`;
+//const API_WEATHER = `https://api.openweathermap.org/data/2.5/weather?appid=${import.meta.env.VITE_APY_KEY}&lang=es`;
+
+const API_WEATHER = `https://api.openweathermap.org/data/2.5/weather?appid=57bf3b9c1321607efc63a452980cacb0&lang=es`;
 
 let cityUrl = "&q=";
 
@@ -91,7 +94,7 @@ export default function App() {
           error={error.error}
           helperText={error.message}
         />
-        <Button
+        <LoadingButton
           variant="contained"
           type="submit"
           startIcon={<ManageSearchIcon />}
@@ -101,7 +104,7 @@ export default function App() {
           size="medium"
         >
           Buscar
-        </Button>
+        </LoadingButton>
       </Box>
 
       {weather.city && (
@@ -129,18 +132,7 @@ export default function App() {
         </Box>
       )}
 
-      <Typography
-        textAlign="center"
-        sx={{mt:2 , fontSize: "10px"}}
-      >
-        Powered by:{" "}
-        <a
-          href="https://www.weatherapi.com/"
-          title="Weather API"
-        >
-          WeatherAPI.com
-        </a>
-        </Typography>
+      
         <Typography
         textAlign="center"
         sx={{mt:2 , fontSize: "10px"}}
