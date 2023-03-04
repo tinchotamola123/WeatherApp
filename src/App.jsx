@@ -5,8 +5,12 @@ import { TextField, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { useState } from "react";
 
-const API_WEATHER = `http://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_APY_KEY}&q=`;
+//const API_WEATHER = `http://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_APY_KEY}&q=`;
 
+const API_WEATHER = `https://api.openweathermap.org/data/2.5/weather?appid=${import.meta.env.VITE_APY_KEY}&lang=es`;
+let cityUrl = "&q=";
+
+//https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
 export default function App() {
   
@@ -22,7 +26,6 @@ export default function App() {
     country: "",
     temp: "",
     condition: "",
-    icon: "",
     conditionText: "",
   });
 
@@ -35,18 +38,18 @@ export default function App() {
     });
     try{
       if(!city.trim()) throw { message : "El campo ciudad es obligatorio"}
-      const response = await fetch(`${API_WEATHER}${city}`);
+      console.log(city)
+      const response = await fetch(`${API_WEATHER}${cityUrl}${city}`);
       const data = await response.json();
       
       if (data.error) throw { message: data.error.message}
       console.log(data)
       setWeather({
-        city: data.location.name,
-        country: data.location.country,
-        temp: data.current.temp_c,
-        condition: data.current.condition.code,
-        icon: data.current.condition.icon,
-        conditionText: data.current.condition.text,
+        city: data.name,
+        country: data.sys.country,
+        temp: data.main.temp,
+        condition: data.weather[0].main,
+        conditionText: data.weather[0].description,
       })
 
     } catch (error) {
@@ -115,18 +118,14 @@ export default function App() {
           <Typography variant="h4" component="h2">
             {weather.city}, {weather.country}
           </Typography>
-          <Box
-            component="img"
-            alt={weather.conditionText}
-            src={weather.icon}
-            sx={{margin: "0 auto"}}
-          >
+          <Box>
+            {weather.condition.toUpperCase()},
           </Box>
           <Typography variant="h5" component="h3">
-            {weather.temp} °C
+            {weather.temp.toString()} °C
           </Typography>
           <Typography variant="h6" component="h4">
-            {weather.conditionText}
+            {weather.conditionText.toUpperCase()}
           </Typography>
           
         </Box>
